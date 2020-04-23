@@ -16,12 +16,14 @@ void pushStack(stack *s, char val) {
 
 void popStack(stack *s) {
     struct stackNode *node = s->head;
-    s->head = node->next;
-    free(node);
+    if (node != NULL) {
+        s->head = node->next;
+        free(node);
+    }
 }
 
 void freeStack(stack *s) {
-    if (s->head != NULL) {
+    while (s->head != NULL) {
         popStack(s);
     }
 }
@@ -73,6 +75,3 @@ bool isValid(char * s){
     return false;
 
 }
-
-
-
