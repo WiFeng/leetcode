@@ -1,4 +1,6 @@
 bool isValid(char **board, int row, int col, char c) {
+    int regionRow = (row/3)*3;
+    int regionCol = (col/3)*3;
     for (int i = 0; i < 9; i++) {
         if (board[row][i] == c) {
             return false;
@@ -6,16 +8,16 @@ bool isValid(char **board, int row, int col, char c) {
         if (board[i][col] == c) {
             return false;
         }
-        if (board[(row/3)*3 + i/3][(col/3)*3 + i%3] == c) {
+        if (board[regionRow + i/3][regionCol + i%3] == c) {
             return false;
         }
     }
     return true;
 }
 
-bool solve(char **board, int boardSize, int* boardColSize) {
-    for (int row = 0; row < boardSize; row++) {
-        for (int col = 0; col < *boardColSize; col++) {
+bool solve(char **board, int boardSize, int* boardColSize, int row, int col) {
+    for (; row < boardSize; row++, col = 0) {
+        for (; col < *boardColSize; col++) {
             if (board[row][col] != '.') {
                 continue;
             }
@@ -24,7 +26,7 @@ bool solve(char **board, int boardSize, int* boardColSize) {
                     continue;
                 }
                 board[row][col] = c;
-                if (solve(board, boardSize,  boardColSize)) {
+                if (solve(board, boardSize,  boardColSize, row, col)) {
                     return true;
                 }
                 board[row][col] = '.';
@@ -40,5 +42,5 @@ void solveSudoku(char** board, int boardSize, int* boardColSize){
         return;
     }
 
-    solve(board, boardSize, boardColSize);
+    solve(board, boardSize, boardColSize, 0, 0);
 }
