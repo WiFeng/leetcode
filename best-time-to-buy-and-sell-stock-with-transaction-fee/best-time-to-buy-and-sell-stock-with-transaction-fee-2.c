@@ -26,7 +26,6 @@ int genericMaxProfit(int* prices, int pricesSize, int fee) {
     return result;
 }
 
-int maxProfit(int* prices, int pricesSize){
-    int fee = 0;
+int maxProfit(int* prices, int pricesSize, int fee){
     return genericMaxProfit(prices, pricesSize, fee);
 }
