@@ -2,7 +2,31 @@ int max(int a, int b) {
     return a > b ? a : b;
 }
 
-int genericMaxProfit(int* prices, int pricesSize, int K) {
+int genericMaxProfit(int* prices, int pricesSize, int fee) {
+
+    if (pricesSize < 1) {
+        return 0;
+    }
+
+    int result = 0;
+
+    int dp[2];
+    dp[0] = 0;
+    dp[1] = - prices[0];
+
+    for (int i = 1; i < pricesSize; i++) {
+        int t0, t1;
+        t0 = max(dp[0], dp[1] + prices[i] - fee);
+        t1 = max(dp[1], dp[0] - prices[i]);
+        dp[0] = t0;
+        dp[1] = t1;
+    }
+
+    result = dp[0];
+    return result;
+}
+
+int genericMaxProfitByK(int* prices, int pricesSize, int fee, int K) {
     int maxProfit = 0;
 
     if (pricesSize < 1) {
@@ -26,7 +50,7 @@ int genericMaxProfit(int* prices, int pricesSize, int K) {
 
             // dp formula
             int t0, t1;
-            t0 = max(dp[k][0], dp[k][1] + prices[i]);
+            t0 = max(dp[k][0], dp[k][1] + prices[i] - fee);
             t1 = max(dp[k][1], dp[k-1][0] - prices[i]);
             dp[k][0] = t0;
             dp[k][1] = t1;
@@ -42,11 +66,10 @@ int genericMaxProfit(int* prices, int pricesSize, int K) {
 }
 
 int maxProfit(int k, int* prices, int pricesSize){
-
+    int fee = 0;
     int K = k;
-    if (k > pricesSize) {
-        K = pricesSize / 2 + 1;
+    if (k > pricesSize / 2) {
+       return genericMaxProfit(prices, pricesSize, fee);
     }
-
-    return genericMaxProfit(prices, pricesSize, K);
+    return genericMaxProfitByK(prices, pricesSize, fee, K);
 }
