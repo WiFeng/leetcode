@@ -75,7 +75,6 @@ struct ListNode* mergeKLists(struct ListNode** lists, int listsSize){
         tempLists[tempListsSize++] = list;
     }
 
-
     result = mergeKLists(tempLists, tempListsSize);
     free(tempLists);
 
