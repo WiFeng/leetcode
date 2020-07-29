@@ -1,5 +1,6 @@
 class Solution {
-    private int[][] points;
+
+    int [][] points;
 
     public int[][] kClosest(int[][] points, int K) {
         this.points = points;
@@ -7,18 +8,21 @@ class Solution {
         return Arrays.copyOfRange(points, 0, K);
     }
 
-    public void work(int i, int j, int K) {
-        if (i >= j) return;
+    private void work(int i, int j, int K) {
         
-        int oi = i, oj = j;
-        int pivotIndex = ThreadLocalRandom.current().nextInt(i, j); // 0
-        int pivotVal = dist(pivotIndex);
+        if (i >= j) {
+            return;
+        }
 
+        int oi = i, oj = j;
+        int pivotIndex = ThreadLocalRandom.current().nextInt(i, j);
+        int pivotVal = dist(pivotIndex);
+    
         while (i < j) {
-            while (i < j && dist(i) < pivotVal) i++; // i = 1
+            while (i < j && dist(i) < pivotVal) i++;
             while (i < j && dist(j) > pivotVal) j--;
             swap(i, j);
-            if (dist(i) == pivotVal && dist(j) == pivotVal){
+            if (dist(i) == pivotVal && dist(j) == pivotVal) {
                 break;
             }
         }
@@ -28,10 +32,9 @@ class Solution {
         } else {
             work(i + 1, oj, K - (i - oi + 1));
         }
-
     }
 
-    public void swap(int i, int j) {
+    private void swap(int i, int j) {
         int t0 = points[i][0], t1 = points[i][1];
         points[i][0] = points[j][0];
         points[i][1] = points[j][1];
@@ -39,7 +42,8 @@ class Solution {
         points[j][1] = t1;
     }
 
-    public int dist(int i) {
+    private int dist(int i) {
         return points[i][0] * points[i][0] + points[i][1] * points[i][1];
     }
+    
 }
