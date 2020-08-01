@@ -25,7 +25,7 @@ MinStack* minStackCreate() {
 void minStackPush(MinStack* obj, int x) {
     if (obj->used >= obj->size) {
         int size = obj->size * 2;
-        int *pool = realloc(obj->pool, sizeof(Node) * size);
+        Node *pool = realloc(obj->pool, sizeof(Node) * size);
         obj->size = size;
         obj->pool = pool;
     }
