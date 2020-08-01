@@ -21,7 +21,7 @@ typedef struct {
 // Stack
 // -----------------------------
 Stack* StackCreate() {
-    int initSize = 8;
+    int initSize = 4;
     struct TreeNode **pool = malloc(sizeof(struct TreeNode*) * initSize);
 
     Stack *obj = malloc(sizeof(Stack));
