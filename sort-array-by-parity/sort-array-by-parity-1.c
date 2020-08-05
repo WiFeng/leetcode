@@ -9,11 +9,6 @@ int* sortArrayByParity(int* A, int ASize, int* returnSize){
     }
     
     int *result = malloc(sizeof(int) * ASize);
-    if (ASize < 2) {
-        result[0] = A[0];
-        return result;
-    }
-
     for (int slow = -1, fast = 0; fast < ASize; fast++) {
         if (A[fast] % 2 == 0) {
             if (slow == -1) {
