@@ -6,15 +6,12 @@ class Solution {
         Map<Integer, String> tempName = new HashMap<>();
 
         DSU dsu = new DSU(1000);
-        Map<String, String> emailToName = new HashMap<>();
         Map<String, Integer> emailToId = new HashMap<>();
 
         for (int i = 0; i < accounts.size(); i++) {
             String name = accounts.get(i).get(0);
             for (int j = 1; j < accounts.get(i).size(); j++) {
                 String email = accounts.get(i).get(j);
-                emailToName.put(email, name);
-
                 if (emailToId.containsKey(email)) {
                     dsu.unionSet(emailToId.get(email), i);
                 } else {
@@ -94,4 +91,4 @@ class DSU {
         }
         return set[element];
     }
-} 
+}
