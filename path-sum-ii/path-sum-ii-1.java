@@ -16,13 +16,13 @@ class Solution {
             return result;
         }
 
-        List<Integer> list = new LinkedList<>();
+        LinkedList<Integer> list = new LinkedList<>();
         recursive(root, list, sum);
         return result;
     }
 
-    private void recursive(TreeNode root, List<Integer> list, int sum) {
-        list.add(root.val);
+    private void recursive(TreeNode root, LinkedList<Integer> list, int sum) {
+        list.addLast(root.val);
 
         if (root.left == null && root.right == null) {
             if (sum == root.val) {
@@ -44,6 +44,6 @@ class Solution {
             recursive(root.right, list, sum - root.val);
         }
 
-        list.remove(list.size()-1);
+        list.removeLast();
     }
 }
