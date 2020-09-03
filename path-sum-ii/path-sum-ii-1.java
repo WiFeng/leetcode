@@ -27,25 +27,23 @@ class Solution {
         if (root.left == null && root.right == null) {
             if (sum == root.val) {
                 // ans
-                ArrayList<Integer> ans = new ArrayList<>();
-                for (Integer item : list) {
-                    ans.add(item);
-                }
+                // ArrayList<Integer> ans = new ArrayList<>();
+                // for (Integer item : list) {
+                //     ans.add(item);
+                // }
+                ArrayList<Integer> ans = new ArrayList<>(list);
                 result.add(ans);
             }
-            return;
         }
 
         if (root.left != null) {
             recursive(root.left, list, sum - root.val);
-            //list.remove();
-            list.remove(list.size()-1);
         }
 
         if (root.right != null) {
             recursive(root.right, list, sum - root.val);
-            //list.remove();
-            list.remove(list.size()-1);
         }
+
+        list.remove(list.size()-1);
     }
 }
